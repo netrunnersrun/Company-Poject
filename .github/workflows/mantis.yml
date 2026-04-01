@@ -17,7 +17,7 @@ jobs:
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-      - name: Login to DO Registry
+      - name: Login to Scanner Registry
         run: doctl registry login --expiry-seconds 300
 
       - name: Run Mantis Scanner
@@ -33,4 +33,5 @@ jobs:
             --path /scan \
             --output json \
             --post-results https://api.mantiseu.com/api/scans \
-            --api-key ${{ secrets.MANTIS_API_KEY }}
+            --api-key ${{ secrets.MANTIS_API_KEY }} \
+            --repo-name ${{ github.repository }}
