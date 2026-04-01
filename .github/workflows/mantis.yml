@@ -12,6 +12,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Login to DO Registry
+        run: doctl registry login --expiry-seconds 300
+
       - name: Run Mantis Scanner
         env:
           CF_ACCESS_CLIENT_ID: ${{ secrets.MANTIS_CF_CLIENT_ID }}
