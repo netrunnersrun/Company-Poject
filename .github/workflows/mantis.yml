@@ -20,6 +20,9 @@ jobs:
       - name: Login to Scanner Registry
         run: doctl registry login --expiry-seconds 300
 
+      - name: Pull latest scanner
+        run: docker pull registry.digitalocean.com/ai-sast/scanner:latest
+
       - name: Run Mantis Scanner
         env:
           CF_ACCESS_CLIENT_ID: ${{ secrets.MANTIS_CF_CLIENT_ID }}
